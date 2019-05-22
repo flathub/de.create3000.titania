@@ -324,16 +324,6 @@
 			]
 		},
 		{
-			"name": "imagemagick",
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://archive.ubuntu.com/ubuntu/pool/main/i/imagemagick/imagemagick_6.9.10.14+dfsg.orig.tar.xz",
-					"sha256": "20f48004c696eee645c5e468b1ff291ceed2759d9c0ed75eb9e616067cc096fd"
-				}
-			]
-		},
-		{
 			"name": "bullet",
 			"buildsystem": "cmake",
 			"build-options" : {
