@@ -44,33 +44,34 @@
       1024 MB RAM und eine Monitorauflösung von mindestens 1280 × 1024 Pixeln.
     </p>
   </description>
-  <update_contact>holger.seelig@create3000.de</update_contact>
+  <update_contact>holger.seelig@gmail.com</update_contact>
   <developer_name>Holger Seelig</developer_name>
-  <url type="homepage">http://create3000.de/</url>
-  <url type="help">http://create3000.de/titania/documentation/</url>
+  <url type="homepage">https://github.com/create3000/titania</url>
+  <url type="help">https://github.com/create3000/titania</url>
   <url type="bugtracker">https://github.com/create3000/titania/issues</url>
   <launchable type="desktop-id">de.create3000.titania.desktop</launchable>
-  <icon type="remote" height="64" width="64">http://create3000.de/wp-content/uploads/2019/04/icon64.png</icon>
-  <icon type="remote" height="128" width="128">http://create3000.de/wp-content/uploads/2019/04/icon128.png</icon>
+  <icon type="remote" height="64" width="64">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/icon64.png</icon>
+  <icon type="remote" height="128" width="128">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/icon128.png</icon>
   <screenshots>
     <screenshot type="default">
       <caption>Main application window</caption>
-      <image type="source" width="1600" height="900">http://create3000.de/wp-content/uploads/2019/05/screenshot1.jpg</image>
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/screenshot1.jpg</image>
     </screenshot>
     <screenshot>
       <caption>Route Graph Editor</caption>
-      <image type="source" width="1600" height="900">http://create3000.de/wp-content/uploads/2019/05/screenshot2.png</image>
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/screenshot2.png</image>
     </screenshot>
     <screenshot>
       <caption>Script Editor</caption>
-      <image type="source" width="1600" height="900">http://create3000.de/wp-content/uploads/2019/05/screenshot3.png</image>
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/screenshot3.png</image>
     </screenshot>
     <screenshot>
       <caption>Outline Editor</caption>
-      <image type="source" width="1600" height="900">http://create3000.de/wp-content/uploads/2019/05/screenshot4.png</image>
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/create3000/titania/master/Titania/assets/screenshot4.png</image>
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2020-03-21" version="4.6.10"/>
     <release date="2019-12-05" version="4.6.9"/>
     <release date="2019-11-20" version="4.6.8"/>
     <release date="2019-11-09" version="4.6.7"/>
