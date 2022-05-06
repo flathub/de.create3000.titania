@@ -345,6 +345,7 @@
 		},
 		{
 			"name": "titania",
+			"buildsystem": "autotools",
 			"build-options": {
 				"cflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66",
 				"cxxflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66"
