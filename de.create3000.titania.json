@@ -31,10 +31,10 @@
 		"update-mime-database /app/share/mime/",
 		"gtk-update-icon-cache --ignore-theme-index /app/share/icons/hicolor/"
 	],
-        "sdk-extensions": [
-            "org.freedesktop.Sdk.Extension.llvm13",
-            "org.freedesktop.Sdk.Extension.rust-stable"
-        ],
+	"sdk-extensions": [
+		"org.freedesktop.Sdk.Extension.llvm13",
+		"org.freedesktop.Sdk.Extension.rust-stable"
+	],
 	"add-extensions": {
 		"org.freedesktop.Platform.ffmpeg-full": {
 			"directory": "lib/ffmpeg",
