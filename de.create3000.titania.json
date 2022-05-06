@@ -263,7 +263,7 @@
 				{
 					"type": "archive",
 					"url": "https://github.com/CGAL/cgal/archive/refs/tags/releases/CGAL-4.13.zip",
-					"sha256": "7eb40eb7f490289e5b36d15d79c86c3301b16965fa83691f23ce134924732ad2"
+					"sha256": "e1feafd2a5b1d4cfc20facae8ad901e5ed003e7168279fb798dbc60f0d1753dc"
 				}
 			]
 		},
