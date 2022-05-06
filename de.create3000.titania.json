@@ -1,7 +1,7 @@
 {
 	"app-id": "de.create3000.titania",
 	"runtime": "org.gnome.Platform",
-	"runtime-version": "40",
+	"runtime-version": "42",
 	"sdk": "org.gnome.Sdk",
 	"command": "titania",
 	"finish-args": [
@@ -11,8 +11,7 @@
 		"--share=network",
 		"--socket=pulseaudio",
 		"--socket=wayland",
-		"--socket=x11",
-		"--talk-name=org.gtk.vfs",
+		"--socket=fallback-x11",
 		"--talk-name=org.gtk.vfs.*",
 		"--filesystem=xdg-run/gvfs",
 		"--filesystem=xdg-run/gvfsd"
@@ -32,9 +31,10 @@
 		"update-mime-database /app/share/mime/",
 		"gtk-update-icon-cache --ignore-theme-index /app/share/icons/hicolor/"
 	],
-  "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.rust-stable"
-  ],
+        "sdk-extensions": [
+            "org.freedesktop.Sdk.Extension.llvm13",
+            "org.freedesktop.Sdk.Extension.rust-stable"
+        ],
 	"add-extensions": {
 		"org.freedesktop.Platform.ffmpeg-full": {
 			"directory": "lib/ffmpeg",
@@ -65,7 +65,7 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://download.gnome.org/sources/libsigc%2B%2B/2.10/libsigc%2B%2B-2.10.7.tar.xz",
+					"url": "https://download.gnome.org/sources/libsigc++/2.10/libsigc++-2.10.7.tar.xz",
 					"sha256": "d082a2ce72c750f66b1a415abe3e852df2eae1e8af53010f4ac2ea261a478832"
 				}
 			]
@@ -75,8 +75,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://download.gnome.org/sources/cairomm/1.12/cairomm-1.12.0.tar.xz",
-					"sha256": "a54ada8394a86182525c0762e6f50db6b9212a2109280d13ec6a0b29bfd1afe6"
+					"url": "https://www.cairographics.org/releases/cairomm-1.12.2.tar.gz",
+					"sha256": "45c47fd4d0aa77464a75cdca011143fea3ef795c4753f6e860057da5fb8bd599"
 				}
 			]
 		},
@@ -95,14 +95,15 @@
 		},
 		{
 			"name": "pangomm",
+			"buildsystem": "meson",
 			"config-opts": [
-				"--disable-documentation"
+				"-Ddocumentation=false"
 			],
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://download.gnome.org/sources/pangomm/2.42/pangomm-2.42.0.tar.xz",
-					"sha256": "ca6da067ff93a6445780c0b4b226eb84f484ab104b8391fb744a45cbc7edbf56"
+					"url": "https://download.gnome.org/sources/pangomm/2.46/pangomm-2.46.2.tar.xz",
+					"sha256": "57442ab4dc043877bfe3839915731ab2d693fc6634a71614422fb530c9eaa6f4"
 				}
 			]
 		},
@@ -137,8 +138,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://download.gnome.org/sources/gtksourceview/3.24/gtksourceview-3.24.9.tar.xz",
-					"sha256": "699d76a453e6a3d3331906346e3dbfa25f2cbc9ec090e46635e9c6bb595e07c2"
+					"url": "https://download.gnome.org/sources/gtksourceview/3.24/gtksourceview-3.24.10.tar.xz",
+					"sha256": "ab5406cdd0bdcf66afcd52b1e048a2f43c0f3ab391644ee30d9ac419b93cd59b"
 				}
 			]
 		},
@@ -147,13 +148,17 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtksourceviewmm/libgtksourceviewmm_3.18.0.orig.tar.xz",
+					"url": "https://download.gnome.org/sources/gtksourceviewmm/3.18/gtksourceviewmm-3.18.0.tar.xz",
 					"sha256": "51081ae3d37975dae33d3f6a40621d85cb68f4b36ae3835eec1513482aacfb39"
 				}
 			]
 		},
 		{
 			"name": "libgstreamermm",
+                        "build-options": {
+                            "cflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66",
+                            "cxxflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66"
+                        },
 			"config-opts": [
 				"--disable-documentation"
 			],
@@ -162,15 +167,22 @@
 					"type": "archive",
 					"url": "https://download.gnome.org/sources/gstreamermm/1.10/gstreamermm-1.10.0.tar.xz",
 					"sha256": "be58fe9ef7d7e392568ec85e80a84f4730adbf91fb0355ff7d7c616675ea8d60"
+				},
+				{
+					"type": "patch",
+					"path": "patches/gstreamermm-build-fix.patch"
 				}
 			]
 		},
 		{
 			"name": "libxml++",
+			"config-opts": [
+				"--disable-documentation"
+			],
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://download.gnome.org/sources/libxml%2B%2B/2.42/libxml%2B%2B-2.42.1.tar.xz",
+					"url": "https://download.gnome.org/sources/libxml++/2.42/libxml++-2.42.1.tar.xz",
 					"sha256": "9b59059abe5545d28ceb388a55e341095f197bd219c73e6623aeb6d801e00be8"
 				}
 			]
@@ -283,53 +295,65 @@
 					"sha256": "117097da6d50ddbad0e48bb1e6cdc61468e82ba1d32001dd8e2366b445133a8c"
 				}
 			]
-	  },
-   {
-      "name": "autoconf-2.13",
-      "config-opts": [
-        "--program-suffix=2.13"
-      ],
-      "cleanup": [
-        "*"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz",
-          "sha256": "f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e"
-        }
-      ]
-    },
-	  {
-		  "name": "mozjs",
-      "buildsystem": "simple",
-      "build-options": {
-        "append-path": "/usr/lib/sdk/rust-stable/bin",
-        "env": {
-          "AR": "llvm-ar",
-          "NM": "llvm-nm",
-          "RANLIB": "llvm-ranlib"
-        }
-      },
-      "build-commands": [
-        "mkdir build; cd build && ../js/src/configure --prefix=/app --enable-optimize --disable-tests --disable-jemalloc --disable-js-shell --enable-linker=lld --without-intl-api --enable-shared-js --disable-jitspew && make -j $FLATPAK_BUILDER_N_JOBS && make install"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://ftp.mozilla.org/pub/firefox/releases/68.9.0esr/source/firefox-68.9.0esr.source.tar.xz",
-          "sha256": "935105e1a8a97d64daffb372690e2b566b5f07641f01470929dbbc82d20d4407"
-        }
-      ]
-    },
+	        },
+                {
+                    "name": "autoconf-2.13",
+                    "config-opts": [
+                        "--program-suffix=2.13"
+                    ],
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz",
+                            "sha256": "f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e"
+                        }
+                    ]
+                },
+	        {
+		    "name": "mozjs",
+                    "buildsystem": "autotools",
+                    "build-options": {
+                        "append-path": "/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/llvm13/bin",
+                        "env": {
+                            "AR": "llvm-ar",
+                            "NM": "llvm-nm",
+                            "RANLIB": "llvm-ranlib"
+                        }
+                    },
+                    "builddir": true,
+                    "subdir": "js/src",
+                    "config-opts": [
+                        "--prefix=/app",
+                        "--enable-optimize",
+                        "--disable-tests",
+                        "--disable-jemalloc",
+                        "--enable-linker=lld",
+                        "--without-intl-api",
+                        "--enable-shared-js",
+                        "--disable-jitspew"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://ftp.mozilla.org/pub/firefox/releases/68.9.0esr/source/firefox-68.9.0esr.source.tar.xz",
+                            "sha256": "935105e1a8a97d64daffb372690e2b566b5f07641f01470929dbbc82d20d4407"
+                        }
+                    ]
+                },
 		{
 			"name": "titania",
+			"build-options": {
+				"cflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66",
+				"cxxflags": "-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66"
+			},
 			"sources": [
 				{
 					"type": "git",
 					"url": "https://github.com/create3000/titania.git",
-					"tag": "4.6.11",
-					"commit": "713b64e174465d865b58ec8345dd5ecef54a0736"
+					"tag": "4.6.11"
 				}
 			]
 		}
