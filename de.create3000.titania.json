@@ -262,8 +262,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://github.com/CGAL/cgal/archive/refs/tags/releases/CGAL-4.14.3.tar.gz",
-					"sha256": "05badca4025ec85012942533f5f1af6314ae10ce2f7effcc094b6844c4a54985"
+					"url": "https://github.com/CGAL/cgal/archive/refs/tags/releases/CGAL-4.13.zip",
+					"sha256": "7eb40eb7f490289e5b36d15d79c86c3301b16965fa83691f23ce134924732ad2"
 				}
 			]
 		},
