@@ -29,7 +29,8 @@
 	],
 	"cleanup-commands": [
 		"update-mime-database /app/share/mime/",
-		"gtk-update-icon-cache --ignore-theme-index /app/share/icons/hicolor/"
+		"gtk-update-icon-cache --ignore-theme-index /app/share/icons/hicolor/",
+		"mkdir -p /app/lib/ffmpeg"
 	],
 	"sdk-extensions": [
 		"org.freedesktop.Sdk.Extension.llvm13",
